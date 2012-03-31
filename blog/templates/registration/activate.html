@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Account activated</h2>
+{{ account.username }}<br />
+{{account.email }}
+{% comment %}
+<ul>
+{% for item in dir(account) %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+{% endcomment %}
+{% endblock %}

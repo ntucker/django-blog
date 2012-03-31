@@ -1,0 +1,25 @@
+{% extends "site_base.html" %}
+
+{% load pagination_tags %}
+{% load cache %}
+
+{% block head_title %}Bloggies{% endblock %}
+
+{% block body %}
+{% cache 300 article_list request.path request.GET request.user.is_staff %}
+
+{% autopaginate article_list 5 %}
+
+<ul class="unstyled">
+{% for article in article_list %}
+<li><h2><a href="{{article.get_absolute_url}}">{{article.title}}</a> - {{article.date}}</h2>
+<article>{{article.body|truncatewords_html:200}}</article>
+</li>
+{% endfor %}
+</ul>
+{% paginate %}
+{% if request.user.is_staff %}
+<a href="{% url create_article %}" class="btn">New Article</a>
+{% endif %}
+{% endcache %}
+{% endblock %}

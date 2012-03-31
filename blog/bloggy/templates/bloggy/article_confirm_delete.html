@@ -1,0 +1,11 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Delete {{article.title}}{% endblock %}
+
+{% block body %}
+
+<form method="POST">
+<p>Delete {{article.title}}?</p>
+{% csrf_token %}<button type="submit" class="btn btn-primary">Yes</button>
+</form>
+{% endblock %}

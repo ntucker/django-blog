@@ -1,0 +1,2 @@
+Thank you for registering for {{ site.name }}. 
+To complete your registration, please visit http://{{ site.domain }}/account/activate/{{ activation_key }}/. You have {{expiration_days}} days to do this before you account is deleted.

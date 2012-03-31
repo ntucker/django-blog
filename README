@@ -1,0 +1,11 @@
+Solution to:
+https://github.com/votizen/careers/blob/master/RemoteCodingProblem.rst
+
+Features:
+- Requirements file for pip install
+- Pagination for all list items (blog articles on homepage, and comments on post)
+- Caching setup (uses redis) - both template fragment (for logged in users), and full view level for anonymous
+- Twitter bootstrap for theming
+- Gzip everything
+- Unify css and js to reduce http requests, also minify
+- WYSIWYG editing with TinyMCE

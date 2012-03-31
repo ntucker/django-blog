@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<p>You are already logged in.</p>
+<p>You must <a href="{% url auth_logout %}">logout</a> before you can login again.</p>
+{% else %}
+<form method="post" class="form-horizontal well">
+{{ form|as_bootstrap }}
+{% csrf_token %}
+<input type="hidden" name="redirect_field_name" value="{{ redirect_field_name }}" />
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Login</button>
+</div>
+</form>
+{% endif %}
+{% endblock %}

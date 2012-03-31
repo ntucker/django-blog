@@ -1,0 +1,44 @@
+{% extends "site_base.html" %}
+
+{% load comments %}
+{% load bootstrap_tags %}
+{% load pagination_tags %}
+{% load cache %}
+
+{% block head_title %}{{article.title}}{% endblock %}
+
+{% block body %}
+{% cache 300 article_detail request.path request.GET request.user.is_staff %}
+<h1>{{article.title}}</h1>
+<h2>{{article.date}}</h2>
+<article>
+{{article.body}}
+</article>
+{% if request.user.is_staff %}
+<a href="{% url edit_article article.slug %}" class="btn">Edit</a>
+<a href="{% url delete_article article.slug %}" class="btn btn-danger">Delete</a>
+{% endif %}
+<div>
+{% get_comment_list for article as comment_list %}
+{% autopaginate comment_list 10 %}
+<ul class="unstyled">
+{% for comment in comment_list %}
+<li><h3>{% if comment.user_url %}<a href="{{comment.user_url}}">{% endif %}{{comment.user_name}}{% if comment.user_url %}</a>{% endif %}</h3>
+<h4>{{comment.submit_date}}</h4>
+<p>{{comment.comment}}</p></li>
+{% endfor %}
+</ul>
+</div>
+{% paginate %}
+{% get_comment_form for article as comment_form %}
+<form method="post" class="form-horizontal well" action="{% comment_form_target %}">
+<legend>Comment</legend>
+{{comment_form|as_bootstrap}}
+{% csrf_token %}
+<input type="hidden" name="next" value="{{request.path}}" />
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Post</button>
+</div>
+</form>
+{% endcache %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load bootstrap_tags %}
+{% load compress %}
+
+{% block head_title %}Edit{% endblock %}
+
+{% block extra_head %}
+{{form.media.js}}
+{% endblock %}
+
+{% block extra_style %}{{form.media.css}}{% endblock %}
+
+{% block body %}
+<form method="post" class="form-horizontal well">
+{{form|as_bootstrap}}
+{% csrf_token %}
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Save</button>
+</div>
+</form>
+{% endblock %}

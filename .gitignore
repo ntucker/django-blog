@@ -1,1 +1,9 @@
 *.pyc
+.hg/*
+ENV/*
+blog/local_settings.py
+.settings/org.eclipse.core.resources.prefs
+.pydevproject
+.project
+blog/site_media/*
+blog/.gondor/site_key
